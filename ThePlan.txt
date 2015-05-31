@@ -1,0 +1,20 @@
+The plan (subject to change):
+
+1. Download all Brautigan poetry from https://sites.google.com/site/brautiganarchives/home
+
+2. Use map reduce to perform word incidence & count from all poetry
+* use Shakespeare code & Cloudera Live to do this easily
+
+3. Decide which words, if any, to throw out
+
+4. Create source file from which "poems" will be generated
+* Look at how dariusk has done this
+
+5. Determine "rules" for poems
+* haiku or free form w/ varying line lengths?
+
+6. Write python code to generate poems
+
+7. Write ??? to post poems to Twitter
+
+8. After success case works, ensure coverage with test code, error handling, etc.
