@@ -12,9 +12,10 @@ with open('C:\Users\karen\poems_for_wordcount.txt', 'r+') as sourcefile:
         else:
             wordcount[word] += 1
 
-# reverse sort on number of occurrences (v)
-# TODO also non-reverse (alpha) sort on k -  do I care about that?
-x = sorted(wordcount.items(), key=itemgetter(1), reverse=1)
+# first sort to get k by alpha
+y = sorted(wordcount.items(), key=itemgetter(0))
+# then reverse sort on number of occurrences (v) to get list in desc order
+x = sorted(y, key=itemgetter(1), reverse=1)
 
 # open the outfile where the lines will be written
 with open('C:\Users\karen\poem_words_out.txt', 'w+') as outfile:
