@@ -3,6 +3,7 @@
 from operator import itemgetter
 
 # open the source file containing all poems
+# with open() closes after, no need to do that separately
 with open('C:\Users\karen\poems_for_wordcount.txt', 'r+') as sourcefile:
     wordcount = {}
     # count occurrence of each word, lowercase to avoid Hello and hello being distinct
@@ -23,6 +24,4 @@ with open('C:\Users\karen\poem_words_out.txt', 'w+') as outfile:
     for k, v in x:
         outfile.write(str(k) + " " + str(v) + "\n")
 
-# close the files
-sourcefile.close()
-outfile.close()
+
