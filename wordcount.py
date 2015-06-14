@@ -12,14 +12,27 @@ SOURCE = os.path.join(_path, 'poems_for_wordcount.txt')
 DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 
+def sort_word_counts(word_dict):
+    # first sort to get k by alpha
+    sorted_by_key = sorted(word_dict.items(), key=itemgetter(0))
+    # then reverse sort on number of occurrences (v) to get list in desc order
+    return sorted(sorted_by_key, key=itemgetter(1), reverse=1)
+
+
 def main():
     with open(SOURCE, 'rb') as source, open(DESTINATION, 'wb') as destination:
         word_counts = Counter(source.read().lower().split())
-        sorted_count_list = sorted(
-            word_counts.items(), key=itemgetter(1), reverse=True
-        )
-        for item in sorted_count_list:
+        for item in sort_word_counts(word_counts):
             print("{} {}".format(*item), file=destination)
+
+
+def test_sort_word_counts():
+    word_list = 'you watch the brown fox jumped over the fence'.split()
+    word_counts = Counter(word_list)
+    sorted_list = sort_word_counts(word_counts)
+    assert sorted_list[0][0] == 'the'
+    assert sorted_list[1][0] == 'brown'
+    assert sorted_list[-1][0] == 'you'
 
 
 def test_output():
