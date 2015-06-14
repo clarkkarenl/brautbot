@@ -12,7 +12,8 @@ DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 # with open() closes after, no need to do that separately
 with open(SOURCE, 'r+') as sourcefile:
     wordcount = {}
-    # count occurrence of each word, lowercase to avoid Hello and hello being distinct
+    # count occurrence of each word, lowercase to avoid Hello and hello being
+    # distinct
     for word in sourcefile.read().lower().split():
         if word not in wordcount:
             wordcount[word] = 1
@@ -29,5 +30,3 @@ with open(DESTINATION, 'w+') as outfile:
     # write each line to the outfile
     for k, v in x:
         outfile.write(str(k) + " " + str(v) + "\n")
-
-
