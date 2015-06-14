@@ -2,6 +2,7 @@
 
 from operator import itemgetter
 import os
+import pytest
 
 
 _path = os.path.abspath(os.path.dirname(__file__))
@@ -43,13 +44,16 @@ def main():
             outfile.write(str(k) + " " + str(v) + "\n")
 
 
-def test_count_words():
-    word_list = 'you watch the brown fox jumped over the fence'.split()
+@pytest.fixture
+def word_list():
+    return 'you watch the brown fox jumped over the fence'.split()
+
+
+def test_count_words(word_list):
     assert count_words(word_list)['the'] == 2
 
 
-def test_sort_wordcount():
-    word_list = 'you watch the brown fox jumped over the fence'.split()
+def test_sort_wordcount(word_list):
     word_count = count_words(word_list)
     assert sort_word_count(word_count)[0][0] == 'the'
 
