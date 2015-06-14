@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from collections import Counter
 from operator import itemgetter
 import os
 import pytest
@@ -11,10 +12,7 @@ DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 
 def count_words(word_list):
-    word_count = {}
-    for word in word_list:
-        word_count[word] = word_count.setdefault(word, 0) + 1
-    return word_count
+    return Counter(word_list)
 
 
 def sort_word_count(word_dict):
