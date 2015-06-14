@@ -9,18 +9,23 @@ SOURCE = os.path.join(_path, 'poems_for_wordcount.txt')
 DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 
+def count_words(word_list):
+    wordcount = {}
+    for word in word_list:
+        if word not in wordcount:
+            wordcount[word] = 1
+        else:
+            wordcount[word] += 1
+    return wordcount
+
+
 def main():
     # open the source file containing all poems
     # with open() closes after, no need to do that separately
     with open(SOURCE, 'r+') as sourcefile:
-        wordcount = {}
         # count occurrence of each word, lowercase to avoid Hello and hello
         # being distinct
-        for word in sourcefile.read().lower().split():
-            if word not in wordcount:
-                wordcount[word] = 1
-            else:
-                wordcount[word] += 1
+        wordcount = count_words(sourcefile.read().lower().split())
 
     # first sort to get k by alpha
     y = sorted(wordcount.items(), key=itemgetter(0))
@@ -32,6 +37,11 @@ def main():
         # write each line to the outfile
         for k, v in x:
             outfile.write(str(k) + " " + str(v) + "\n")
+
+
+def test_count_words():
+    word_list = 'the brown fox jumped over the fence'.split()
+    assert count_words(word_list)['the'] == 2
 
 
 def test_output():
