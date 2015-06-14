@@ -1,10 +1,16 @@
 #!/usr/bin/python
 
 from operator import itemgetter
+import os
+
+
+_path = os.path.abspath(os.path.dirname(__file__))
+SOURCE = os.path.join(_path, 'poems_for_wordcount.txt')
+DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 # open the source file containing all poems
 # with open() closes after, no need to do that separately
-with open('C:\Users\karen\poems_for_wordcount.txt', 'r+') as sourcefile:
+with open(SOURCE, 'r+') as sourcefile:
     wordcount = {}
     # count occurrence of each word, lowercase to avoid Hello and hello being distinct
     for word in sourcefile.read().lower().split():
@@ -19,7 +25,7 @@ y = sorted(wordcount.items(), key=itemgetter(0))
 x = sorted(y, key=itemgetter(1), reverse=1)
 
 # open the outfile where the lines will be written
-with open('C:\Users\karen\poem_words_out.txt', 'w+') as outfile:
+with open(DESTINATION, 'w+') as outfile:
     # write each line to the outfile
     for k, v in x:
         outfile.write(str(k) + " " + str(v) + "\n")
