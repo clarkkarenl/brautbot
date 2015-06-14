@@ -10,7 +10,6 @@ DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 
 def main():
-
     # open the source file containing all poems
     # with open() closes after, no need to do that separately
     with open(SOURCE, 'r+') as sourcefile:
@@ -33,6 +32,15 @@ def main():
         # write each line to the outfile
         for k, v in x:
             outfile.write(str(k) + " " + str(v) + "\n")
+
+
+def test_output():
+    main()
+    output = open(DESTINATION, 'rb').readlines()
+    word, count = output[0].split()
+    assert len(output) == 3518
+    assert word == 'the'
+    assert int(count) == 1085
 
 
 if __name__ == '__main__':
