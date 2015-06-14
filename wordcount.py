@@ -13,10 +13,7 @@ DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 def count_words(word_list):
     word_count = {}
     for word in word_list:
-        if word not in word_count:
-            word_count[word] = 1
-        else:
-            word_count[word] += 1
+        word_count[word] = word_count.setdefault(word, 0) + 1
     return word_count
 
 
