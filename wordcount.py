@@ -16,10 +16,7 @@ def count_words(word_list):
 
 
 def sort_word_count(word_dict):
-    # first sort to get k by alpha
-    y = sorted(word_dict.items(), key=itemgetter(0))
-    # then reverse sort on number of occurrences (v) to get list in desc order
-    return sorted(y, key=itemgetter(1), reverse=1)
+    return sorted(word_dict.items(), key=itemgetter(1), reverse=True)
 
 
 def main():
