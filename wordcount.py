@@ -19,6 +19,13 @@ def count_words(word_list):
     return wordcount
 
 
+def sort_word_count(word_dict):
+    # first sort to get k by alpha
+    y = sorted(word_dict.items(), key=itemgetter(0))
+    # then reverse sort on number of occurrences (v) to get list in desc order
+    return sorted(y, key=itemgetter(1), reverse=1)
+
+
 def main():
     # open the source file containing all poems
     # with open() closes after, no need to do that separately
@@ -27,10 +34,7 @@ def main():
         # being distinct
         wordcount = count_words(sourcefile.read().lower().split())
 
-    # first sort to get k by alpha
-    y = sorted(wordcount.items(), key=itemgetter(0))
-    # then reverse sort on number of occurrences (v) to get list in desc order
-    x = sorted(y, key=itemgetter(1), reverse=1)
+    x = sort_word_count(wordcount)
 
     # open the outfile where the lines will be written
     with open(DESTINATION, 'w+') as outfile:
@@ -40,8 +44,14 @@ def main():
 
 
 def test_count_words():
-    word_list = 'the brown fox jumped over the fence'.split()
+    word_list = 'you watch the brown fox jumped over the fence'.split()
     assert count_words(word_list)['the'] == 2
+
+
+def test_sort_wordcount():
+    word_list = 'you watch the brown fox jumped over the fence'.split()
+    word_count = count_words(word_list)
+    assert sort_word_count(word_count)[0][0] == 'the'
 
 
 def test_output():
