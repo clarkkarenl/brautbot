@@ -11,13 +11,13 @@ DESTINATION = os.path.join(_path, 'poem_words_out.txt')
 
 
 def count_words(word_list):
-    wordcount = {}
+    word_count = {}
     for word in word_list:
-        if word not in wordcount:
-            wordcount[word] = 1
+        if word not in word_count:
+            word_count[word] = 1
         else:
-            wordcount[word] += 1
-    return wordcount
+            word_count[word] += 1
+    return word_count
 
 
 def sort_word_count(word_dict):
@@ -33,9 +33,9 @@ def main():
     with open(SOURCE, 'r+') as sourcefile:
         # count occurrence of each word, lowercase to avoid Hello and hello
         # being distinct
-        wordcount = count_words(sourcefile.read().lower().split())
+        word_count = count_words(sourcefile.read().lower().split())
 
-    x = sort_word_count(wordcount)
+    x = sort_word_count(word_count)
 
     # open the outfile where the lines will be written
     with open(DESTINATION, 'w+') as outfile:
@@ -53,7 +53,7 @@ def test_count_words(word_list):
     assert count_words(word_list)['the'] == 2
 
 
-def test_sort_wordcount(word_list):
+def test_sort_word_count(word_list):
     word_count = count_words(word_list)
     assert sort_word_count(word_count)[0][0] == 'the'
 
